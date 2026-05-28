@@ -460,7 +460,7 @@ function StoryStage() {
       >
         {STORY_PLAN.map((s, i) => (
           <FadeSection key={i} index={i}>
-            <StoryLayout image={s.image} variant={s.variant} />
+            <StoryLayout image={s.image} variant={s.variant} decos={s.decos} />
           </FadeSection>
         ))}
 
