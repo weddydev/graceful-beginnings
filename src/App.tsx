@@ -439,20 +439,20 @@ const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
     { src: feather, x: -4, y: -30, size: 50, rotate: 12 },
   ]},
   // 3 — Garden
-  { image: story3, variant: 2, decos: [
+  { image: story4, variant: 2, decos: [
     // { src: decoVine,   x: -6,  y: -4,  size: 32, rotate: -15 },
     // { src: decoCherry, x: 64, y: -20,  size: 52, rotate: 10 },
-     { src: decoHibiscus, x: -16, y: 88, size: 35, rotate: -18 },
-     { src: ornpearl, x: 50, y: -20, size: 150, rotate: 0 },
-  ]},
-  // 4 — Sunlit / gold
-  { image: story4, variant: 7, decos: [
     { src: swan, x: 46, y: -35, size: 70, rotate: 0 },
     { src: orntassle, x: -6, y: 100, size: 30, rotate: 0 },
   ]},
-  // 5 — Romantic
-  { image: story5, variant: 4, decos: [
-    { src: pigeon, x: -14,  y: -52,   size: 68, rotate: -5 },
+  // 4 — Sunlit / gold
+  { image: story3, variant: 7, decos: [
+      { src: decoHibiscus, x: -16, y: 88, size: 35, rotate: -18 },
+    ]},
+    // 5 — Romantic
+    { image: story5, variant: 4, decos: [
+    { src: ornpearl, x: 50, y: -20, size: 150, rotate: 0 },
+    // { src: pigeon, x: -14,  y: -52,   size: 68, rotate: -5 },
     { src: decoCherry,   x:50, y: 76, size: 68, rotate: -15 },
   ]},
   // 6 — Regal
