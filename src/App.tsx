@@ -260,28 +260,30 @@ function ImageFrame({
   );
 }
 
-/* ---------- Corner spray — attaches florals to a corner of the image,
-   stems flow inward across the image while petals spill outward ---------- */
-function CornerSpray({
+/* ---------- Outside decoration — anchored to image corner, fully outside the frame ---------- */
+type Anchor = "tl" | "tr" | "bl" | "br";
+function OutsideDeco({
   src,
-  position,
-  size = "78%",
+  anchor,
+  size = "55%",
   delay = 0,
+  rotate = 0,
 }: {
   src: string;
-  position: "tl" | "tr" | "bl" | "br";
+  anchor: Anchor;
   size?: string;
   delay?: number;
+  rotate?: number;
 }) {
-  // Offset pushes the floral mass partially outside the image corner so it
-  // looks like a branch growing out from behind the frame.
-  const pos: Record<string, React.CSSProperties> = {
-    tl: { top: 0, left: 0, transform: "translate(-22%, -22%)", transformOrigin: "top left" },
-    tr: { top: 0, right: 0, transform: "translate(22%, -22%)", transformOrigin: "top right" },
-    bl: { bottom: 0, left: 0, transform: "translate(-22%, 22%)", transformOrigin: "bottom left" },
-    br: { bottom: 0, right: 0, transform: "translate(22%, 22%)", transformOrigin: "bottom right" },
+  // Anchors element so its body sits OUTSIDE the image, with one inner corner
+  // just kissing the image corner (small overlap for "connected" feel).
+  const pos: Record<Anchor, React.CSSProperties> = {
+    tl: { right: "92%", bottom: "88%", transformOrigin: "bottom right" },
+    tr: { left: "92%", bottom: "88%", transformOrigin: "bottom left" },
+    bl: { right: "92%", top: "88%", transformOrigin: "top right" },
+    br: { left: "92%", top: "88%", transformOrigin: "top left" },
   };
-  const sway = position === "tl" || position === "br" ? [-1.5, 1.5, -1.5] : [1.5, -1.5, 1.5];
+  const swayDir = anchor === "tl" || anchor === "br" ? [-2, 2, -2] : [2, -2, 2];
   return (
     <motion.img
       src={src}
@@ -292,44 +294,33 @@ function CornerSpray({
       style={{
         width: size,
         height: "auto",
-        filter: "drop-shadow(0 6px 14px rgba(60,10,20,0.18))",
-        ...pos[position],
+        filter: "drop-shadow(0 8px 18px rgba(60,10,20,0.22))",
+        ...pos[anchor],
       }}
-      initial={{ opacity: 0, scale: 0.92 }}
-      whileInView={{ opacity: 1, scale: 1, rotate: sway }}
+      initial={{ opacity: 0, scale: 0.9, rotate: rotate - 4 }}
+      whileInView={{ opacity: 1, scale: 1, rotate: swayDir.map((d) => rotate + d) }}
       viewport={{ once: false, amount: 0.25 }}
       transition={{
         opacity: { duration: 1.1, delay },
         scale: { duration: 1.1, delay, ease: "easeOut" },
-        rotate: { duration: 8, repeat: Infinity, ease: "easeInOut", delay },
+        rotate: { duration: 9, repeat: Infinity, ease: "easeInOut", delay },
       }}
     />
   );
 }
 
-/* ---------- Story layouts — diagonal corner sprays attached to image ---------- */
+/* ---------- Story layouts — curated decorations per section ---------- */
+type DecoSpec = { src: string; anchor: Anchor; size?: string; rotate?: number; delay?: number };
+
 function StoryLayout({
   image,
   variant,
+  decos,
 }: {
   image: string;
   variant: number;
+  decos: DecoSpec[];
 }) {
-  // Each variant pairs two diagonally opposite corner sprays so the
-  // decorations frame the image and feel anchored to its corners.
-  const pairs: Record<number, ["tl" | "tr" | "bl" | "br", "tl" | "tr" | "bl" | "br"]> = {
-    1: ["tl", "br"],
-    2: ["tr", "bl"],
-    4: ["tl", "br"],
-    5: ["br", "tl"],
-    7: ["tr", "bl"],
-    9: ["tl", "br"],
-    10: ["bl", "tr"],
-  };
-  const srcMap = { tl: cornerTL, tr: cornerTR, bl: cornerBL, br: cornerBR };
-  const [a, b] = pairs[variant] ?? pairs[1];
-
-  // Variant 3 keeps the circle wreath layout (kept in code, not in plan)
   if (variant === 3) {
     return (
       <ImageFrame image={image} circle>
@@ -337,14 +328,15 @@ function StoryLayout({
       </ImageFrame>
     );
   }
-
   return (
     <ImageFrame image={image}>
-      <CornerSpray src={srcMap[a]} position={a} size="80%" />
-      <CornerSpray src={srcMap[b]} position={b} size="68%" delay={0.15} />
+      {decos.map((d, i) => (
+        <OutsideDeco key={i} {...d} />
+      ))}
     </ImageFrame>
   );
 }
+
 
 
 // no-op placeholder to satisfy import surface
