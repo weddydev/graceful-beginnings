@@ -391,16 +391,43 @@ const ALL_STORY_IMAGES = [
 // originally 8 image sections + 1 CTA. We want to comment out the 3rd-last
 // (i.e. the slide with the circle wreath variant). Remove index 5 (story6)
 // which previously used the circle layout.
-const STORY_PLAN: { image: string; variant: number }[] = [
-  { image: story1, variant: 1 },
-  { image: story2, variant: 5 },
-  { image: story3, variant: 2 },
-  { image: story4, variant: 7 },
-  { image: story5, variant: 4 },
-  // { image: story6, variant: 3 }, // ← circle wreath slide (hidden, kept in code)
-  { image: story7, variant: 9 },
-  { image: story8, variant: 10 },
+const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
+  // Welcome / royal — burgundy bouquet hangs from top-left, wax seal at bottom-right
+  { image: story1, variant: 1, decos: [
+    { src: decoBurgundy, anchor: "tl", size: "62%", rotate: -8 },
+    { src: decoWaxSeal, anchor: "br", size: "28%" },
+  ]},
+  // Soft / ivory — single trailing white orchid from top-right
+  { image: story2, variant: 5, decos: [
+    { src: decoWhiteOrchid, anchor: "tr", size: "58%", rotate: 12 },
+  ]},
+  // Garden — hanging vine top-left, cherry blossom bottom-right
+  { image: story3, variant: 2, decos: [
+    { src: decoVine, anchor: "tl", size: "40%", rotate: -10 },
+    { src: decoCherry, anchor: "br", size: "42%" },
+  ]},
+  // Sunlit / gold — single gold hibiscus bottom-right
+  { image: story4, variant: 7, decos: [
+    { src: decoHibiscus, anchor: "br", size: "48%", rotate: -15 },
+  ]},
+  // Romantic — cherry blossom top-left, vine bottom-right trailing
+  { image: story5, variant: 4, decos: [
+    { src: decoCherry, anchor: "tl", size: "44%", rotate: -8 },
+    { src: decoVine, anchor: "br", size: "38%", rotate: 180 },
+  ]},
+  // { image: story6, variant: 3 },
+  // Regal — burgundy bouquet top-right, wax seal bottom-left
+  { image: story7, variant: 9, decos: [
+    { src: decoBurgundy, anchor: "tr", size: "60%", rotate: 10 },
+    { src: decoWaxSeal, anchor: "bl", size: "28%" },
+  ]},
+  // Finale — gold hibiscus top-right, white orchid bottom-left
+  { image: story8, variant: 10, decos: [
+    { src: decoHibiscus, anchor: "tr", size: "46%", rotate: 12 },
+    { src: decoWhiteOrchid, anchor: "bl", size: "52%", rotate: -10 },
+  ]},
 ];
+
 void ALL_STORY_IMAGES;
 
 function StoryStage() {
