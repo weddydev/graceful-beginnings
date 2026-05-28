@@ -402,44 +402,53 @@ const ALL_STORY_IMAGES = [
   story1, story2, story3, story4, story5, story6, story7, story8,
 ];
 
-// Hide 3rd-last slide (the circle image variant). Story plan (variants):
-// originally 8 image sections + 1 CTA. We want to comment out the 3rd-last
-// (i.e. the slide with the circle wreath variant). Remove index 5 (story6)
-// which previously used the circle layout.
+/* ============================================================================
+   PER-SECTION DECORATION CONFIG
+   ----------------------------------------------------------------------------
+   TWEAK THESE NUMBERS to move / resize / rotate any decoration.
+   All values are RELATIVE TO THE IMAGE (% of image width or height), so the
+   layout stays identical on every phone size.
+
+     x       0–100 → center INSIDE image | <0 = past left | >100 = past right
+     y       0–100 → center INSIDE image | <0 = past top  | >100 = past bottom
+     size    width of deco as % of image width
+     rotate  degrees (negative = counter-clockwise)
+     sway    optional idle wobble in degrees (default 2)
+     delay   optional animation delay in seconds
+   ========================================================================== */
 const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
-  // Welcome / royal — burgundy bouquet hangs from top-left, wax seal at bottom-right
+  // 1 — Welcome / royal
   { image: story1, variant: 1, decos: [
-    { src: decoBurgundy, anchor: "tl", size: "62%", rotate: -8 },
-    { src: decoWaxSeal, anchor: "br", size: "28%" },
+    { src: decoBurgundy, x: -8,  y: 18,  size: 55, rotate: -12 },
+    { src: decoWaxSeal,  x: 108, y: 92,  size: 22, rotate: 8 },
   ]},
-  // Soft / ivory — single trailing white orchid from top-right
+  // 2 — Soft / ivory
   { image: story2, variant: 5, decos: [
-    { src: decoWhiteOrchid, anchor: "tr", size: "58%", rotate: 12 },
+    { src: decoWhiteOrchid, x: 108, y: 20, size: 50, rotate: 15 },
   ]},
-  // Garden — hanging vine top-left, cherry blossom bottom-right
+  // 3 — Garden
   { image: story3, variant: 2, decos: [
-    { src: decoVine, anchor: "tl", size: "40%", rotate: -10 },
-    { src: decoCherry, anchor: "br", size: "42%" },
+    { src: decoVine,   x: -6,  y: -4,  size: 32, rotate: -15 },
+    { src: decoCherry, x: 104, y: 96,  size: 36, rotate: 10 },
   ]},
-  // Sunlit / gold — single gold hibiscus bottom-right
+  // 4 — Sunlit / gold
   { image: story4, variant: 7, decos: [
-    { src: decoHibiscus, anchor: "br", size: "48%", rotate: -15 },
+    { src: decoHibiscus, x: 106, y: 88, size: 40, rotate: -18 },
   ]},
-  // Romantic — cherry blossom top-left, vine bottom-right trailing
+  // 5 — Romantic
   { image: story5, variant: 4, decos: [
-    { src: decoCherry, anchor: "tl", size: "44%", rotate: -8 },
-    { src: decoVine, anchor: "br", size: "38%", rotate: 180 },
+    { src: decoCherry, x: -4,  y: 8,   size: 38, rotate: -10 },
+    { src: decoVine,   x: 104, y: 100, size: 30, rotate: 175 },
   ]},
-  // { image: story6, variant: 3 },
-  // Regal — burgundy bouquet top-right, wax seal bottom-left
+  // 6 — Regal
   { image: story7, variant: 9, decos: [
-    { src: decoBurgundy, anchor: "tr", size: "60%", rotate: 10 },
-    { src: decoWaxSeal, anchor: "bl", size: "28%" },
+    { src: decoBurgundy, x: 108, y: 18, size: 55, rotate: 14 },
+    { src: decoWaxSeal,  x: -8,  y: 92, size: 22, rotate: -8 },
   ]},
-  // Finale — gold hibiscus top-right, white orchid bottom-left
+  // 7 — Finale
   { image: story8, variant: 10, decos: [
-    { src: decoHibiscus, anchor: "tr", size: "46%", rotate: 12 },
-    { src: decoWhiteOrchid, anchor: "bl", size: "52%", rotate: -10 },
+    { src: decoHibiscus,    x: 106, y: 10,  size: 38, rotate: 15 },
+    { src: decoWhiteOrchid, x: -6,  y: 92,  size: 46, rotate: -12 },
   ]},
 ];
 
