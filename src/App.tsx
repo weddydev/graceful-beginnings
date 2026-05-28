@@ -18,14 +18,11 @@ import story5 from "@/assets/story-5.jpeg";
 import story6 from "@/assets/story-6.jpeg";
 import story7 from "@/assets/story-6.jpeg";
 import story8 from "@/assets/story-8.jpeg";
-import floralCorner from "@/assets/floral-corner.png";
 import floralWreath from "@/assets/floral-wreath.png";
-import ornBouquet from "@/assets/orn-bouquet.png";
-import ornTassel from "@/assets/orn-tassel.png";
-import ornPearl from "@/assets/orn-pearl.png";
-import ornFeather from "@/assets/orn-feather.png";
-import ornPressed from "@/assets/orn-pressed.png";
-import ornCrest from "@/assets/orn-crest.png";
+import cornerTL from "@/assets/corner-tl.png";
+import cornerTR from "@/assets/corner-tr.png";
+import cornerBL from "@/assets/corner-bl.png";
+import cornerBR from "@/assets/corner-br.png";
 
 /* ---------- Animated decoration wrappers ---------- */
 type DecoProps = {
