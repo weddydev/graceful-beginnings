@@ -25,6 +25,15 @@ import decoVine from "@/assets/deco-hanging-vine.png";
 import decoWaxSeal from "@/assets/deco-wax-seal.png";
 import decoCherry from "@/assets/deco-cherry-blossom.png";
 import decoHibiscus from "@/assets/deco-gold-hibiscus.png";
+import swan from "@/assets/e-swan.png";
+import butterfly from "@/assets/e-butterfly.png";
+import feather from "@/assets/e-feather.png";
+import pigeon from "@/assets/e-pigeon.png";
+import ribbon from "@/assets/e-ribbon.png";
+import cornerframe from "@/assets/e-corner-frame.png";
+import horizontalflowers from "@/assets/e-horizontal-flowers.png";
+import verticalflowers from "@/assets/e-vertical-flowers.png";
+import orntassle from "@/assets/orn-tassel.png";
 
 /* ---------- Animated decoration wrappers ---------- */
 type DecoProps = {
@@ -198,7 +207,7 @@ function MainImg({
   image,
   width = "92%",
   maxWidth = 380,
-  ratio = "1 / 1.4",
+  ratio = "1 / 1.5",
   rounded = "rounded-sm",
   extraStyle,
 }: {
@@ -228,7 +237,7 @@ function MainImg({
 function ImageFrame({
   image,
   children,
-  ratio = "1 / 1.4",
+  ratio = "1 / 1.5",
   rounded = "rounded-sm",
   circle = false,
 }: {
@@ -419,36 +428,40 @@ const ALL_STORY_IMAGES = [
 const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
   // 1 — Welcome / royal
   { image: story1, variant: 1, decos: [
-    { src: decoBurgundy, x: -8,  y: 18,  size: 55, rotate: -12 },
-    { src: decoWaxSeal,  x: 108, y: 92,  size: 22, rotate: 8 },
+    { src: decoWaxSeal, x: 35,  y: 93,  size: 25, rotate: 0 },
+    { src: horizontalflowers, x: 8, y: -42,  size: 82, rotate: 8 },
+    // { src: decoWaxSeal,  x: 108, y: 92,  size: 22, rotate: 8 },
   ]},
   // 2 — Soft / ivory
   { image: story2, variant: 5, decos: [
-    { src: decoWhiteOrchid, x: 108, y: 20, size: 50, rotate: 15 },
+    { src: decoHibiscus, x: 78, y: 90, size: 30, rotate: 15 },
+    { src: feather, x: -4, y: -30, size: 50, rotate: 12 },
   ]},
   // 3 — Garden
   { image: story3, variant: 2, decos: [
-    { src: decoVine,   x: -6,  y: -4,  size: 32, rotate: -15 },
-    { src: decoCherry, x: 104, y: 96,  size: 36, rotate: 10 },
+    // { src: decoVine,   x: -6,  y: -4,  size: 32, rotate: -15 },
+    { src: decoCherry, x: 64, y: -20,  size: 52, rotate: 10 },
+     { src: decoHibiscus, x: -16, y: 88, size: 35, rotate: -18 },
   ]},
   // 4 — Sunlit / gold
   { image: story4, variant: 7, decos: [
-    { src: decoHibiscus, x: 106, y: 88, size: 40, rotate: -18 },
+    { src: swan, x: 46, y: -35, size: 70, rotate: 0 },
+    { src: orntassle, x: -6, y: 100, size: 30, rotate: 0 },
   ]},
   // 5 — Romantic
   { image: story5, variant: 4, decos: [
-    { src: decoCherry, x: -4,  y: 8,   size: 38, rotate: -10 },
-    { src: decoVine,   x: 104, y: 100, size: 30, rotate: 175 },
+    { src: pigeon, x: -14,  y: -52,   size: 68, rotate: -5 },
+    { src: decoCherry,   x:50, y: 76, size: 68, rotate: -15 },
   ]},
   // 6 — Regal
   { image: story7, variant: 9, decos: [
-    { src: decoBurgundy, x: 108, y: 18, size: 55, rotate: 14 },
-    { src: decoWaxSeal,  x: -8,  y: 92, size: 22, rotate: -8 },
+    { src: horizontalflowers, x: 4, y: -40, size: 90, rotate: 0 },
+    { src: decoWaxSeal,  x: 36,  y: 92, size: 28, rotate: 0 },
   ]},
   // 7 — Finale
   { image: story8, variant: 10, decos: [
-    { src: decoHibiscus,    x: 106, y: 10,  size: 38, rotate: 15 },
-    { src: decoWhiteOrchid, x: -6,  y: 92,  size: 46, rotate: -12 },
+    { src: decoHibiscus,    x: -10, y: 90,  size: 38, rotate: 15 },
+    { src: decoWhiteOrchid, x: 66,  y: -12,  size: 56, rotate: -12 },
   ]},
 ];
 
