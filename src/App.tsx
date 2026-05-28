@@ -260,30 +260,40 @@ function ImageFrame({
   );
 }
 
-/* ---------- Outside decoration — anchored to image corner, fully outside the frame ---------- */
-type Anchor = "tl" | "tr" | "bl" | "br";
-function OutsideDeco({
-  src,
-  anchor,
-  size = "55%",
-  delay = 0,
-  rotate = 0,
-}: {
+/* ============================================================================
+   DECORATION POSITIONING — fully adjustable by numbers
+   ----------------------------------------------------------------------------
+   Each deco is placed RELATIVE TO THE IMAGE (not the viewport), so its
+   position stays identical across every mobile screen size.
+
+   All numbers are in % of the IMAGE box (width or height of the photo frame).
+
+     x        →  horizontal anchor, 0 = left edge of image, 100 = right edge
+     y        →  vertical anchor,   0 = top edge of image,  100 = bottom edge
+     size     →  width of the deco, as % of the image width
+     rotate   →  rotation in degrees (negative = counter-clockwise)
+     delay    →  animation delay in seconds (optional)
+     sway     →  idle sway amplitude in degrees (optional, default 2)
+
+   The deco is CENTERED on (x, y). To put it OUTSIDE the image:
+     • use x < 0 or x > 100 to push past the left/right edge
+     • use y < 0 or y > 100 to push past the top/bottom edge
+   Examples:
+     { x: -10, y: 10,  size: 50 }  → hugs top-left corner, mostly outside
+     { x: 110, y: 95,  size: 35 }  → hangs off bottom-right corner
+     { x: 50,  y: -15, size: 40 }  → crown on top center, outside
+   ========================================================================== */
+type DecoSpec = {
   src: string;
-  anchor: Anchor;
-  size?: string;
-  delay?: number;
+  x: number;
+  y: number;
+  size: number;
   rotate?: number;
-}) {
-  // Anchors element so its body sits OUTSIDE the image, with one inner corner
-  // just kissing the image corner (small overlap for "connected" feel).
-  const pos: Record<Anchor, React.CSSProperties> = {
-    tl: { right: "92%", bottom: "88%", transformOrigin: "bottom right" },
-    tr: { left: "92%", bottom: "88%", transformOrigin: "bottom left" },
-    bl: { right: "92%", top: "88%", transformOrigin: "top right" },
-    br: { left: "92%", top: "88%", transformOrigin: "top left" },
-  };
-  const swayDir = anchor === "tl" || anchor === "br" ? [-2, 2, -2] : [2, -2, 2];
+  delay?: number;
+  sway?: number;
+};
+
+function Deco({ src, x, y, size, rotate = 0, delay = 0, sway = 2 }: DecoSpec) {
   return (
     <motion.img
       src={src}
@@ -292,13 +302,20 @@ function OutsideDeco({
       aria-hidden
       className="pointer-events-none select-none absolute"
       style={{
-        width: size,
+        left: `${x}%`,
+        top: `${y}%`,
+        width: `${size}%`,
         height: "auto",
+        transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+        transformOrigin: "center center",
         filter: "drop-shadow(0 8px 18px rgba(60,10,20,0.22))",
-        ...pos[anchor],
       }}
-      initial={{ opacity: 0, scale: 0.9, rotate: rotate - 4 }}
-      whileInView={{ opacity: 1, scale: 1, rotate: swayDir.map((d) => rotate + d) }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{
+        opacity: 1,
+        scale: 1,
+        rotate: [rotate - sway, rotate + sway, rotate - sway],
+      }}
       viewport={{ once: false, amount: 0.25 }}
       transition={{
         opacity: { duration: 1.1, delay },
@@ -308,9 +325,6 @@ function OutsideDeco({
     />
   );
 }
-
-/* ---------- Story layouts — curated decorations per section ---------- */
-type DecoSpec = { src: string; anchor: Anchor; size?: string; rotate?: number; delay?: number };
 
 function StoryLayout({
   image,
@@ -331,11 +345,12 @@ function StoryLayout({
   return (
     <ImageFrame image={image}>
       {decos.map((d, i) => (
-        <OutsideDeco key={i} {...d} />
+        <Deco key={i} {...d} />
       ))}
     </ImageFrame>
   );
 }
+
 
 
 
