@@ -19,10 +19,12 @@ import story6 from "@/assets/story-6.jpeg";
 import story7 from "@/assets/story-6.jpeg";
 import story8 from "@/assets/story-8.jpeg";
 import floralWreath from "@/assets/floral-wreath.png";
-import cornerTL from "@/assets/corner-tl.png";
-import cornerTR from "@/assets/corner-tr.png";
-import cornerBL from "@/assets/corner-bl.png";
-import cornerBR from "@/assets/corner-br.png";
+import decoBurgundy from "@/assets/deco-burgundy-bouquet.png";
+import decoWhiteOrchid from "@/assets/deco-white-orchid.png";
+import decoVine from "@/assets/deco-hanging-vine.png";
+import decoWaxSeal from "@/assets/deco-wax-seal.png";
+import decoCherry from "@/assets/deco-cherry-blossom.png";
+import decoHibiscus from "@/assets/deco-gold-hibiscus.png";
 
 /* ---------- Animated decoration wrappers ---------- */
 type DecoProps = {
