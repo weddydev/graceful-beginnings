@@ -258,7 +258,54 @@ function ImageFrame({
   );
 }
 
-/* ---------- Story layouts — image + 1-2 small corner decorations ON the image frame ---------- */
+/* ---------- Corner spray — attaches florals to a corner of the image,
+   stems flow inward across the image while petals spill outward ---------- */
+function CornerSpray({
+  src,
+  position,
+  size = "78%",
+  delay = 0,
+}: {
+  src: string;
+  position: "tl" | "tr" | "bl" | "br";
+  size?: string;
+  delay?: number;
+}) {
+  // Offset pushes the floral mass partially outside the image corner so it
+  // looks like a branch growing out from behind the frame.
+  const pos: Record<string, React.CSSProperties> = {
+    tl: { top: 0, left: 0, transform: "translate(-22%, -22%)", transformOrigin: "top left" },
+    tr: { top: 0, right: 0, transform: "translate(22%, -22%)", transformOrigin: "top right" },
+    bl: { bottom: 0, left: 0, transform: "translate(-22%, 22%)", transformOrigin: "bottom left" },
+    br: { bottom: 0, right: 0, transform: "translate(22%, 22%)", transformOrigin: "bottom right" },
+  };
+  const sway = position === "tl" || position === "br" ? [-1.5, 1.5, -1.5] : [1.5, -1.5, 1.5];
+  return (
+    <motion.img
+      src={src}
+      alt=""
+      loading="lazy"
+      aria-hidden
+      className="pointer-events-none select-none absolute"
+      style={{
+        width: size,
+        height: "auto",
+        filter: "drop-shadow(0 6px 14px rgba(60,10,20,0.18))",
+        ...pos[position],
+      }}
+      initial={{ opacity: 0, scale: 0.92 }}
+      whileInView={{ opacity: 1, scale: 1, rotate: sway }}
+      viewport={{ once: false, amount: 0.25 }}
+      transition={{
+        opacity: { duration: 1.1, delay },
+        scale: { duration: 1.1, delay, ease: "easeOut" },
+        rotate: { duration: 8, repeat: Infinity, ease: "easeInOut", delay },
+      }}
+    />
+  );
+}
+
+/* ---------- Story layouts — diagonal corner sprays attached to image ---------- */
 function StoryLayout({
   image,
   variant,
@@ -266,69 +313,35 @@ function StoryLayout({
   image: string;
   variant: number;
 }) {
-  const layouts: Record<number, React.ReactNode> = {
-    1: (
-      <ImageFrame image={image}>
-        <Float src={floralCorner} className="absolute -top-6 -left-6 w-24 opacity-85" rotate={-12} />
-        <Sway src={ornPearl} className="absolute -top-4 right-2 w-14 opacity-75" rotate={8} amount={3} />
-      </ImageFrame>
-    ),
-    2: (
-      <ImageFrame image={image}>
-        <Sway src={ornPearl} className="absolute -top-6 -right-4 w-20 opacity-85" rotate={10} amount={3} />
-        <Float src={ornBouquet} className="absolute -bottom-6 -left-6 w-24 opacity-80" rotate={-10} />
-      </ImageFrame>
-    ),
-    /* CIRCLE VARIANT — commented out from rotation (kept in code) */
-    3: (
+  // Each variant pairs two diagonally opposite corner sprays so the
+  // decorations frame the image and feel anchored to its corners.
+  const pairs: Record<number, ["tl" | "tr" | "bl" | "br", "tl" | "tr" | "bl" | "br"]> = {
+    1: ["tl", "br"],
+    2: ["tr", "bl"],
+    4: ["tl", "br"],
+    5: ["br", "tl"],
+    7: ["tr", "bl"],
+    9: ["tl", "br"],
+    10: ["bl", "tr"],
+  };
+  const srcMap = { tl: cornerTL, tr: cornerTR, bl: cornerBL, br: cornerBR };
+  const [a, b] = pairs[variant] ?? pairs[1];
+
+  // Variant 3 keeps the circle wreath layout (kept in code, not in plan)
+  if (variant === 3) {
+    return (
       <ImageFrame image={image} circle>
         <Float src={floralWreath} className="absolute -inset-6 w-[calc(100%+3rem)] opacity-55 pointer-events-none" />
       </ImageFrame>
-    ),
-    4: (
-      <ImageFrame image={image}>
-        <Sway src={ornTassel} className="absolute -bottom-8 right-4 w-12 opacity-90" rotate={6} amount={5} />
-        <Float src={floralCorner} className="absolute -top-5 -right-5 w-20 opacity-80 rotate-90" rotate={6} />
-      </ImageFrame>
-    ),
-    5: (
-      <ImageFrame image={image}>
-        <Float src={ornBouquet} className="absolute -bottom-8 -left-8 w-28 opacity-85" rotate={-12} />
-        <Drift src={ornFeather} className="absolute -top-6 right-2 w-16 opacity-75" range={10} />
-      </ImageFrame>
-    ),
-    6: (
-      <ImageFrame image={image}>
-        <Drift src={ornFeather} className="absolute -top-6 -right-6 w-20 opacity-80" range={10} />
-        <Sway src={ornPearl} className="absolute -bottom-4 left-2 w-14 opacity-75" rotate={-6} amount={3} />
-      </ImageFrame>
-    ),
-    7: (
-      <ImageFrame image={image}>
-        <Float src={ornPressed} className="absolute -top-6 -right-6 w-24 opacity-85" rotate={14} />
-        <Sway src={ornTassel} className="absolute -bottom-8 left-6 w-12 opacity-90" rotate={-6} amount={5} />
-      </ImageFrame>
-    ),
-    8: (
-      <ImageFrame image={image}>
-        <Float src={floralCorner} className="absolute -bottom-6 -right-6 w-24 opacity-85 rotate-180" />
-        <Float src={ornCrest} className="absolute -top-8 left-1/2 -translate-x-1/2 w-14 opacity-90" />
-      </ImageFrame>
-    ),
-    9: (
-      <ImageFrame image={image}>
-        <Float src={ornCrest} className="absolute -top-8 left-1/2 -translate-x-1/2 w-16 opacity-95" />
-        <Drift src={ornFeather} className="absolute -bottom-4 -left-4 w-16 opacity-75" range={10} />
-      </ImageFrame>
-    ),
-    10: (
-      <ImageFrame image={image}>
-        <Sway src={ornPearl} className="absolute -top-6 -left-4 w-20 opacity-85" rotate={-10} amount={3} />
-        <Float src={ornBouquet} className="absolute -bottom-8 -right-8 w-28 opacity-85" rotate={12} />
-      </ImageFrame>
-    ),
-  };
-  return <>{layouts[variant] ?? layouts[1]}</>;
+    );
+  }
+
+  return (
+    <ImageFrame image={image}>
+      <CornerSpray src={srcMap[a]} position={a} size="80%" />
+      <CornerSpray src={srcMap[b]} position={b} size="68%" delay={0.15} />
+    </ImageFrame>
+  );
 }
 
 
