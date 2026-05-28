@@ -19,6 +19,7 @@ import story6 from "@/assets/story-6.jpeg";
 import story7 from "@/assets/story-6.jpeg";
 import story8 from "@/assets/story-8.jpeg";
 import floralWreath from "@/assets/floral-wreath.png";
+import twoswans from "@/assets/two-swans.png";
 import decoBurgundy from "@/assets/deco-burgundy-bouquet.png";
 import decoWhiteOrchid from "@/assets/deco-white-orchid.png";
 import decoVine from "@/assets/deco-hanging-vine.png";
@@ -520,16 +521,17 @@ function StoryStage() {
               whileInView={{ scale: 1, opacity: 1 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.9 }}
-              className="relative paper-burgundy gold-frame rounded-sm px-8 py-4 inline-flex flex-col items-center"
+              className="relative paper-burgundy gold-frame rounded-sm px-8 py-4 inline-flex flex-col items-center mt-5"
             >
-              <div className="absolute inset-2 border border-[#c9a44c]/50 pointer-events-none rounded-sm" />
+              <div className="absolute inset-2 border border-[#c9a44c]/50 pointer-events-none rounded-sm " />
               
-              <span className="font-script gold-text text-3xl leading-tight">
+              <span className="font-script gold-text text-3xl leading-tight ">
                 Visit Website
               </span>
               
             </motion.a>
           </div>
+          <img className="absolute w-[100%] max-w-[520px] opacity-100 pointer-events-none" style={{ left: "50%", top: "80%", transform: "translate(-50%, -50%)" }} src={twoswans} alt="" />
         </FadeSection>
       </div>
     </motion.div>
