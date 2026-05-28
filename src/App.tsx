@@ -34,6 +34,8 @@ import cornerframe from "@/assets/e-corner-frame.png";
 import horizontalflowers from "@/assets/e-horizontal-flowers.png";
 import verticalflowers from "@/assets/e-vertical-flowers.png";
 import orntassle from "@/assets/orn-tassel.png";
+import boquet from "@/assets/deco-burgundy-bouquet.png";
+import ornpearl from "@/assets/orn-pearl.png";
 
 /* ---------- Animated decoration wrappers ---------- */
 type DecoProps = {
@@ -428,8 +430,7 @@ const ALL_STORY_IMAGES = [
 const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
   // 1 — Welcome / royal
   { image: story1, variant: 1, decos: [
-    { src: decoWaxSeal, x: 35,  y: 93,  size: 25, rotate: 0 },
-    { src: horizontalflowers, x: 8, y: -42,  size: 82, rotate: 8 },
+    { src: horizontalflowers, x: 8, y: -37,  size: 82, rotate: 8 },
     // { src: decoWaxSeal,  x: 108, y: 92,  size: 22, rotate: 8 },
   ]},
   // 2 — Soft / ivory
@@ -440,8 +441,9 @@ const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
   // 3 — Garden
   { image: story3, variant: 2, decos: [
     // { src: decoVine,   x: -6,  y: -4,  size: 32, rotate: -15 },
-    { src: decoCherry, x: 64, y: -20,  size: 52, rotate: 10 },
+    // { src: decoCherry, x: 64, y: -20,  size: 52, rotate: 10 },
      { src: decoHibiscus, x: -16, y: 88, size: 35, rotate: -18 },
+     { src: ornpearl, x: 50, y: -20, size: 150, rotate: 0 },
   ]},
   // 4 — Sunlit / gold
   { image: story4, variant: 7, decos: [
@@ -456,7 +458,7 @@ const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
   // 6 — Regal
   { image: story7, variant: 9, decos: [
     { src: horizontalflowers, x: 4, y: -40, size: 90, rotate: 0 },
-    { src: decoWaxSeal,  x: 36,  y: 92, size: 28, rotate: 0 },
+    // { src: decoWaxSeal,  x: 36,  y: 92, size: 28, rotate: 0 },
   ]},
   // 7 — Finale
   { image: story8, variant: 10, decos: [
@@ -503,33 +505,29 @@ function StoryStage() {
 
         <FadeSection index={STORY_PLAN.length}>
           <div className="relative flex flex-col items-center justify-center px-8 text-center w-full">
+            <h2 style={{ fontSize: "1.5rem" , fontWeight: "bold" }}>Wedding Weekend Details</h2>
+            <span>Visit our wedding website below for all event details and RSVP information.</span>
             <img
-              src={floralWreath}
+              src={boquet}
               alt=""
               loading="lazy"
-              className="absolute w-[110%] max-w-[520px] opacity-80 pointer-events-none"
+              className="absolute w-[80%]  max-w-[520px] opacity-100 pointer-events-none"
+              style={{ left: "20% ", top: "-30%", transform: "translate(-50%, -50%)" }}
             />
             <motion.a
-              href="#"
+              href="https://withjoy.com/pranay-and-binita?utm_medium=web&utm_source=joy&utm_campaign=website_overview_copy"
               initial={{ scale: 0.9, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               whileTap={{ scale: 0.97 }}
               transition={{ duration: 0.9 }}
-              className="relative paper-burgundy gold-frame rounded-sm px-8 py-7 inline-flex flex-col items-center"
+              className="relative paper-burgundy gold-frame rounded-sm px-8 py-4 inline-flex flex-col items-center"
             >
               <div className="absolute inset-2 border border-[#c9a44c]/50 pointer-events-none rounded-sm" />
-              <span className="text-[10px] tracking-[0.5em] uppercase text-[#e8d5a8] mb-3">
-                with love
-              </span>
+              
               <span className="font-script gold-text text-3xl leading-tight">
-                for more details
+                Visit Website
               </span>
-              <span className="font-script gold-text text-3xl leading-tight">
-                please click here
-              </span>
-              <span className="mt-4 text-[10px] tracking-[0.4em] uppercase text-[#f5d98a]/80">
-                open wedding website
-              </span>
+              
             </motion.a>
           </div>
         </FadeSection>
