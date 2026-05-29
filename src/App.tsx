@@ -514,7 +514,7 @@ function StoryStage() {
           <div className="relative flex flex-col items-center justify-center px-8 text-center w-full">
             <h2 style={{ fontSize: "1.5rem" , fontWeight: "bold" }}>Wedding Weekend Details</h2>
             <span>Visit our wedding website below for all event details and RSVP information.</span>
-            <img src={redseal} className="absolute w-[20%] max-w-[520px] opacity-100 pointer-events-none" style={{ left: "50% ", top: "-30%", transform: "translate(-50%, -50%)" }} alt="" />
+            <img src={redseal} className="absolute w-[20%] max-w-[520px] opacity-100 pointer-events-none" style={{ left: "85% ", top: "-110%", transform: "translate(-50%, -50%)" }} alt="" />
             <img
               src={boquet}
               alt=""
