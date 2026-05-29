@@ -10,7 +10,12 @@ import {
 import bgHero from "@/assets/bg-hero.jpg";
 import envelopeClosed from "@/assets/envelope-closed.png";
 import envelopeOpen from "@/assets/envelope-open.png";
+import redseal from "@/assets/red-seal.png";
+import green2flower from "@/assets/greenflower.png";
+import goldbutter from  "@/assets/gold-butter.png";
+import goldcorner from  "@/assets/gold-corner.png";
 import story1 from "@/assets/story-1.jpeg";
+import greenflower from "@/assets/green-flower.png";
 import story2 from "@/assets/story-2.jpeg";
 import story3 from "@/assets/story-3.jpeg";
 import story4 from "@/assets/story-4.jpeg";
@@ -432,7 +437,7 @@ const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
   // 1 — Welcome / royal
   { image: story1, variant: 1, decos: [
     { src: horizontalflowers, x: 8, y: -37,  size: 82, rotate: 8 },
-    // { src: decoWaxSeal,  x: 108, y: 92,  size: 22, rotate: 8 },
+    { src: green2flower,  x: 88, y: 88,  size: 25, rotate: 28 },
   ]},
   // 2 — Soft / ivory
   { image: story2, variant: 5, decos: [
@@ -448,23 +453,24 @@ const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
   ]},
   // 4 — Sunlit / gold
   { image: story3, variant: 7, decos: [
-      { src: decoHibiscus, x: -16, y: 88, size: 35, rotate: -18 },
-    ]},
+    { src: greenflower, x: -8, y: -24, size: 25, rotate: 0 },
+    { src: decoHibiscus, x: 80, y: 88, size: 32, rotate: -18 },
+  ]},
     // 5 — Romantic
     { image: story5, variant: 4, decos: [
     { src: ornpearl, x: 50, y: -20, size: 150, rotate: 0 },
     // { src: pigeon, x: -14,  y: -52,   size: 68, rotate: -5 },
-    { src: decoCherry,   x:50, y: 76, size: 68, rotate: -15 },
+    { src: decoCherry,   x:-19, y: 76, size: 68, rotate: 15 },
   ]},
   // 6 — Regal
   { image: story7, variant: 9, decos: [
-    { src: horizontalflowers, x: 4, y: -40, size: 90, rotate: 0 },
-    // { src: decoWaxSeal,  x: 36,  y: 92, size: 28, rotate: 0 },
+    { src: goldbutter, x: 79, y: 90, size: 36, rotate: 0 },
+    { src: goldcorner,  x: -12,  y: -22, size: 48, rotate: 0 },
   ]},
   // 7 — Finale
   { image: story8, variant: 10, decos: [
     { src: decoHibiscus,    x: -10, y: 90,  size: 38, rotate: 15 },
-    { src: decoWhiteOrchid, x: 66,  y: -12,  size: 56, rotate: -12 },
+    { src: decoWhiteOrchid, x: 66,  y: -18,  size: 56, rotate: -12 },
   ]},
 ];
 
@@ -508,6 +514,7 @@ function StoryStage() {
           <div className="relative flex flex-col items-center justify-center px-8 text-center w-full">
             <h2 style={{ fontSize: "1.5rem" , fontWeight: "bold" }}>Wedding Weekend Details</h2>
             <span>Visit our wedding website below for all event details and RSVP information.</span>
+            <img src={redseal} className="absolute w-[20%] max-w-[520px] opacity-100 pointer-events-none" style={{ left: "50% ", top: "-30%", transform: "translate(-50%, -50%)" }} alt="" />
             <img
               src={boquet}
               alt=""
