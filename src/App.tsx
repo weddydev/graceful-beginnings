@@ -375,43 +375,30 @@ function StoryLayout({
 function Shimmer() {
   return null;
 }
-
 /* ---------- Music button ---------- */
 const MUSIC_SRC =
   "https://res.cloudinary.com/dzgqaidej/video/upload/v1779900301/Jashn-E-BahaaraaInstrumental-Flute-A.R.Rahman_obyuwn.mp3";
 
 function MusicButton() {
-  const [on, setOn] = useState(false);
   const ref = useRef<HTMLAudioElement | null>(null);
+
   useEffect(() => {
     const a = ref.current;
     if (!a) return;
     a.volume = 0.5;
-    if (on) a.play().catch(() => {});
-    else a.pause();
-  }, [on]);
-  return (
-    <>
-      <audio ref={ref} src={MUSIC_SRC} loop preload="none" />
-      <button
-        aria-label={on ? "Pause music" : "Play music"}
-        onClick={() => setOn((v) => !v)}
-        className={`fixed bottom-5 right-5 z-50 w-12 h-12 rounded-full paper-burgundy gold-frame flex items-center justify-center text-[#f5d98a] ${
-          on ? "pulse-ring" : ""
-        }`}
-      >
-        {on ? (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-          </svg>
-        ) : (
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M9 5v14l11-7z" />
-          </svg>
-        )}
-      </button>
-    </>
-  );
+    a.play().catch(() => {
+      // Autoplay blocked — retry on first user interaction
+      const resume = () => {
+        a.play().catch(() => {});
+        document.removeEventListener("click", resume);
+        document.removeEventListener("keydown", resume);
+      };
+      document.addEventListener("click", resume);
+      document.addEventListener("keydown", resume);
+    });
+  }, []);
+
+  return <audio ref={ref} src={MUSIC_SRC} loop preload="auto" />;
 }
 
 /* ---------- Main experience ---------- */
