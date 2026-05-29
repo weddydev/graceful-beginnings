@@ -437,7 +437,7 @@ const STORY_PLAN: { image: string; variant: number; decos: DecoSpec[] }[] = [
   // 1 — Welcome / royal
   { image: story1, variant: 1, decos: [
     { src: horizontalflowers, x: 8, y: -37,  size: 82, rotate: 8 },
-    { src: green2flower,  x: 88, y: 88,  size: 25, rotate: 28 },
+    // { src: green2flower,  x: 88, y: 88,  size: 25, rotate: 28 },
   ]},
   // 2 — Soft / ivory
   { image: story2, variant: 5, decos: [
